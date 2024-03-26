@@ -236,3 +236,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Chainlit
+.chainlit/
+chainlit.md
+

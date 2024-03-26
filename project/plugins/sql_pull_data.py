@@ -1,7 +1,7 @@
 from operator import itemgetter
 
 import pandas as pd
-from langchain.chat_models import AzureChatOpenAI, ChatOpenAI
+from langchain_openai import AzureChatOpenAI, ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableLambda, RunnableMap
@@ -27,6 +27,7 @@ class SqlPullData(Plugin):
             )
         elif api_type == "openai":
             model = ChatOpenAI(
+                base_url=self.config.get("api_base"),
                 openai_api_key=self.config.get("api_key"),
                 model_name=self.config.get("deployment_name"),
                 temperature=0,
@@ -47,7 +48,9 @@ class SqlPullData(Plugin):
 
         if self.db is None:
             self.db = SQLDatabase.from_uri(self.config.get("sqlite_db_path"))
-
+        
+        print(f"This is db schema : {self.db.get_schema()}")
+        
         def get_schema(_):
             return self.db.get_table_info()
 

@@ -23,7 +23,11 @@ plotly>=5.14.1
 pytest>=7.0.0
 vcrpy>=5.0.0
 colorama>=0.4.6
-
-
+langchain
+langchain-openai
+g4f[all]
+curl_cffi
+opentelemetry-api
+opentelemetry-sdk
 
 
